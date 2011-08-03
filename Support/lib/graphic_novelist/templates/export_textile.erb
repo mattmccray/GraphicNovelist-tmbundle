@@ -1,0 +1,29 @@
+<% 
+  first_page = true
+
+  script_nodes.each do |node| 
+    case node.kind 
+      when 'page-header'
+%>
+
+h2{padding-top:1.5em; padding-bottom:0; margin-bottom:0;}. <%= node.body %>
+
+<%
+
+      when 'panel'
+%>|\3{padding-top:1.5em; padding-bottom:1.5em;}. *_Panel <%= node.panel %>_* <%= node.body %> |
+<%
+
+      when 'action'
+%>|\3{padding-top:1.5em; padding-bottom:1.5em;}. <%= node.body %> |
+<%
+
+      when 'dialog', 'sfx'
+%>|{color:gray; padding-left:15px; font-size:75%; vertical-align:top; text-align:center;}. <%= node.count %> |{text-align:right; padding-left:20px; padding-right:5px; min-width:100px; text-decoration:underline; border-right:1px dotted gray; vertical-align:top;}. <%= node.char.join(', ') %> |{padding-left:5px; vertical-align:top; width:75%;}. <%= node.parenthetical %> <%= node.body %> |
+<%
+      else 
+        # What?
+    end
+    first_page = false
+  end
+%>

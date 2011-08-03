@@ -1,0 +1,7 @@
+@ Title:     ${TM_NEW_FILE_BASENAME}
+@ Author:    ${TM_USERNAME}
+@ Revision:  First Draft
+
+[Page 1]
+
+Panel 1 - Panel description here.

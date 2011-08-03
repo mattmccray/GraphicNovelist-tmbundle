@@ -1,0 +1,204 @@
+<html>
+  <head>
+    <title><%= title %> <% unless is_empty?('revision') %>- <%= revision %><% end %> <% unless is_empty?('author') %>(<%= author %>)<% end %></title>
+    <meta name="author" content="<%= author %>" />
+    <meta name="revision" content="<%= revision %>" />
+    <meta name="generator" content="<%= generated_by %>" />
+    <meta name="generated.on" content="<%= generated_on %>" />
+    <style>
+      BODY {
+        /*background-color: #AAA;*/ 
+        background-color: #FFF; }
+      H1 {
+        text-align: center;
+        font-family: Helvetica, Arial, Sans-Serif;
+        margin-top: 25px;
+        margin-bottom: 25px; }
+        H1 DIV {
+          font-size: 50%;
+          color: #666; }
+          
+      #pager {
+        position: fixed;
+        top: 15px;
+        right: 15px; 
+        width: 30px; 
+        padding-top: 8px;
+        padding-bottom: 8px;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        /*background: #333;*/
+        background: #666; }
+        #pager A {
+          text-align: center;
+          font-family: Helvetica, Arial, Sans-Serif;
+          display: block; 
+          color: silver;
+          padding-top: 3px;
+          padding-bottom: 3px;
+          text-decoration: none; }
+        #pager A:hover {
+          color: white; }
+          
+      #page {
+        width: 650px;
+        margin: 25 auto;
+        padding: 25px 0px;
+        /*background-color: #FFF;
+        border-left: 1px solid #666;
+        border-top: 1px solid #666;
+        border-right: 4px solid #666;
+        border-bottom: 4px solid #666; */}
+      
+      .script {
+        width: 550px;
+        margin: 0 auto;
+        font-family: Courier New;
+        font-size: 10pt; }
+        .script TD {
+          padding-top: 4px;
+          padding-bottom: 4px; }
+        .script .page-header {
+          text-align: center;
+          font-weight: bolder; 
+          font-size: 125%; 
+          background-color: #E0E0E0; }
+          .script .page-header A {
+            text-decoration: none;
+            color: black; }
+        .script .character {
+          text-align: right;
+          min-width: 100px;
+          vertical-align: top;
+          white-space: nowrap;
+          padding-left: 10px;
+          padding-right: 5px;
+          
+          border-right: 1px dotted silver; }
+          .script .character SPAN {
+            text-decoration: underline; }
+          .script .character .parenthetical {
+            color: gray;
+            font-size: 85%;
+            text-decoration: none !important; }
+        .script .dialog {
+          padding-left: 5px;
+          vertical-align: top;
+          width: 75%; }
+        .script .dialog-count {
+          padding-left: 10px;
+          padding-top: 5px;
+          vertical-align: top;
+          color: gray;
+          font-size: 75%; }
+        .script .action {
+          padding-top: 15px;
+          padding-bottom: 15px; }
+          .script .action .panel {
+            font-style: italic;
+            font-weight: bold; }
+    </style>
+    <style media="print">
+      HTML, BODY {
+        margin: 0;
+        padding: 0;
+        background-color: #FFF; }
+      H1 {
+        display: none; }
+      #pager {
+        display: none; }
+      #page {
+        page-break-after: always;
+        border: 0px;
+        margin: 0 auto;
+        padding: 0px; }
+        .script .page-header {
+          font-size: 100%;
+          background-color: white; }
+        .script .character .parenthetical {
+          color: black;
+          font-style: italic; }
+        .script .dialog-count {
+          color: black; 
+          font-size: 70%; }
+    </style>
+  </head>
+  <body>
+    <h1>
+      <%= title %>
+      <% unless is_empty?('revision') %>
+      <div><%= revision %></div>
+      <% end %>
+    </h1>
+<% if page_count > 1 %>
+    <div id="pager">
+    <% page_headers.each_with_index do |n, i| %>
+      <a title="Scroll to <%= n.body %>" href="#<%= n.number || (i+1) %>_<%= i+1 %>"><%= n.number || (i+1) %></a>
+    <% end %>
+    </div>
+<% end %>
+<% 
+  this_page = 0
+
+  script_nodes.each do |node| 
+    case node.kind 
+
+      when 'page-header'
+        this_page += 1
+        this_link = node.number || this_page
+        %>
+          <% unless this_page == 1 %>
+          </table>
+        </div>
+          <% end %>
+          <div id="page">
+            <table class="script">
+              <tr>
+                <td class="page-header" colspan="3"><a id="<%= this_link %>_<%= this_page %>" name="<%= this_link %>_<%= this_page %>" href="#<%= this_link %>"><%= node.body %></a></td>
+              </tr>
+        <%
+
+      when 'panel'
+        %>
+        <tr>
+          <td class="action" colspan="3">
+            <span class="panel">Panel <%= node.panel %></span>
+            <%= node.body %>
+          </td>
+        </tr>
+        <%
+
+      when 'action'
+        %>
+        <tr>
+          <td class="action" colspan="3">
+            <%= node.body %>
+          </td>
+        </tr>
+        <%
+
+      when 'dialog', 'sfx'
+        %>
+        <tr>
+          <td class="dialog-count"><%= node.count %></td>
+          <td class="character">
+            <span><%= node.char.join('</span> & <span>') if node.char != node.prev_node.char %></span>
+            <div class="parenthetical"><%= node.parenthetical %></div>
+          </td>
+          <td class="dialog">
+            <%= node.body %>
+          </td>
+        </tr>
+        <%
+
+      else 
+        %>
+          <!-- Huh? <%= node.kind %> -->
+        <%
+    end
+  end
+%>
+      </table>
+    </div>
+  </body>
+</html>

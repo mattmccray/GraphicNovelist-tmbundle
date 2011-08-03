@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>  ${1:CHARACTER}:  ${2:Dialog here...}</string>
+	<key>keyEquivalent</key>
+	<string>@d</string>
+	<key>name</key>
+	<string>Dialog</string>
+	<key>scope</key>
+	<string>text.graphicnovelist</string>
+	<key>uuid</key>
+	<string>8543B758-2EC3-401B-BDD9-BB6D8B5D57B5</string>
+</dict>
+</plist>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>#!/usr/bin/env ruby
+
+# Add the GraphicNovelist support bundle to the lib path...
+$: &lt;&lt; File.join( ENV.fetch('TM_BUNDLE_SUPPORT', '.'), 'lib')
+
+require 'graphic_novelist'
+require 'graphic_novelist/updater'
+
+puts GraphicNovelist::Updater.check_for_updates</string>
+	<key>input</key>
+	<string>none</string>
+	<key>name</key>
+	<string>Check for Updates...</string>
+	<key>output</key>
+	<string>showAsHTML</string>
+	<key>scope</key>
+	<string>text.graphicnovelist</string>
+	<key>uuid</key>
+	<string>1DC07A0E-424C-42CE-9786-AA6C0EE998D4</string>
+</dict>
+</plist>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>#!/usr/bin/env ruby
+
+# Add the GraphicNovelist support bundle to the lib path...
+$: &lt;&lt; File.join( ENV.fetch('TM_BUNDLE_SUPPORT', '.'), 'lib')
+
+require 'graphic_novelist'
+
+format =        :html
+filename =      ENV.fetch('TM_FILEPATH', false)
+selected_text = ENV.fetch('TM_SELECTED_TEXT', "")
+source =        ""
+
+# Try to grab the source from STDIN...
+$stdin.each_line { |line| source &lt;&lt; line }
+
+#puts "FILEPATH = #{filename}&lt;br/&gt;"
+#puts "SELECTED = #{selected_text}"
+
+doc = unless source.empty?
+  GraphicNovelist::Parser.new(source)
+else
+  if filename and selected_text.empty?
+    GraphicNovelist::Parser.from_file( filename )
+  else
+    unless selected_text.empty?
+      GraphicNovelist::Parser.new(selected_text)
+    else
+      puts "&lt;p&gt;No input&lt;/p&gt;"
+      nil
+    end
+  end
+end
+
+puts GraphicNovelist::Exporter.translate_to(format, doc) unless doc.nil?
+</string>
+	<key>fallbackInput</key>
+	<string>document</string>
+	<key>input</key>
+	<string>document</string>
+	<key>keyEquivalent</key>
+	<string>^~@p</string>
+	<key>name</key>
+	<string>Preview</string>
+	<key>output</key>
+	<string>showAsHTML</string>
+	<key>scope</key>
+	<string>text.graphicnovelist</string>
+	<key>uuid</key>
+	<string>44859F86-2311-4448-8131-567AB335662B</string>
+</dict>
+</plist>
