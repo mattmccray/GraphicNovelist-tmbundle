@@ -9,6 +9,8 @@ module GraphicNovelist
           GraphicNovelist::Exporter::Html.new(document, ctx).to_s
         when :textile
           GraphicNovelist::Exporter::Textile.new(document, ctx).to_s
+        when :dialog_only
+          GraphicNovelist::Exporter::DialogOnly.new(document, ctx).to_s
         else
           puts "! Unknown export type: #{kind}. Should be one of [:html, :textile]"
           ""
@@ -26,3 +28,4 @@ end
 
 require 'graphic_novelist/exporters/html'
 require 'graphic_novelist/exporters/textile'
+require 'graphic_novelist/exporters/dialog_only'

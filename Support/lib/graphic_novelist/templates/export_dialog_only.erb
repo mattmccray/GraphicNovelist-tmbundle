@@ -1,0 +1,23 @@
+<% 
+  first_page = true
+  had_dialog = false
+  
+  script_nodes.each do |node| 
+    case node.kind 
+      when 'page-header'
+        if had_dialog
+%>
+---
+<%
+        end
+      when 'dialog', 'sfx'
+        had_dialog= true
+%>
+<%= node.body %>
+<%
+      else 
+        # What?
+    end
+    first_page = false
+  end
+%>
