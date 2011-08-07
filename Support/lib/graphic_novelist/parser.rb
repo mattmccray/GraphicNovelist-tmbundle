@@ -32,6 +32,8 @@ module GraphicNovelist
       @last_node = OpenStruct.new
       @last_line = nil
       @errors = []
+      page_number= 1
+      panel_number= 1
 
       @source.each_with_index do |line, idx|
         skip_it = false
@@ -50,11 +52,19 @@ module GraphicNovelist
             end
             node.number = if /(\d{1,3})/ =~ line.strip.chomp
               $1
+            elsif /(\#{1})/ =~ line.strip.chomp
+              node.body.gsub! /(\#{1})/, page_number.to_s
+              page_number
             else
               nil
             end
             @dlg_cnt = 1
             @sfx_cnt = 'A'
+            if page_number != node.number.to_i
+              page_number = node.number.to_i
+            end
+            page_number += 1
+            panel_number= 1
             
           when '@' # Meta data
             info = line[1..-1]
@@ -109,18 +119,26 @@ module GraphicNovelist
             node = @last_node
 
           else # Action
-            if line.strip.chomp =~ /^panel (\d*)(.*)$/i # Panel action
+          
+        # Panel action
+            if line.strip.chomp =~ /^panel ([\d|\#]*)(.*)$/i
               node.kind = 'panel'
               node.panel = $1.strip
               node.body = $2.strip
-
-            else # Action (default)
+              if /(\#{1})/ =~ node.panel
+                node.panel = panel_number.to_s
+              end
+              panel_number += 1
+        
+        # Action (default)
+            else
               if ['action','panel'].include?( @last_node.kind ) and @last_line != ""
                 skip_it = true
                 node = @last_node
                 @last_node.body += " #{line.strip}"
-                
-              else # Not continued, or seperated by whitespace
+        
+        # Not continued, or seperated by whitespace
+              else 
                 node.kind = 'action'
                 node.body = line.strip
                 if line.strip.empty?

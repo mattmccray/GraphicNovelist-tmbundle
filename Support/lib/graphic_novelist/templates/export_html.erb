@@ -9,13 +9,18 @@
       BODY {
         /*background-color: #AAA;*/ 
         background-color: #FFF; }
-      H1 {
+      header{
         text-align: center;
         font-family: Helvetica, Arial, Sans-Serif;
         margin-top: 25px;
         margin-bottom: 25px; }
-        H1 DIV {
-          font-size: 50%;
+        header h1, h3, h4 {
+          padding: 0px;
+          margin: 0px;
+          }
+        header h3 {
+          color: #777; }
+        header h4 {
           color: #666; }
           
       #pager {
@@ -76,12 +81,16 @@
           
           border-right: 1px dotted silver; }
           .script .character SPAN {
-            text-decoration: underline; }
+            /*text-decoration: underline; */
+            color: blue; }
           .script .character .parenthetical {
             color: gray;
             font-size: 85%;
             text-decoration: none !important; }
+          .script .sfx .character span {
+            color: maroon !important; }
         .script .dialog {
+          color: green;
           padding-left: 5px;
           vertical-align: top;
           width: 75%; }
@@ -103,8 +112,16 @@
         margin: 0;
         padding: 0;
         background-color: #FFF; }
-      H1 {
-        display: none; }
+      header h1, h3, h4 {
+        font-size: 100%;
+        display: inline;
+        }
+      header h1:after, h3:after {
+        content:", ";
+      }
+      header h3, h4 {
+        color: #555 !important;
+      }
       #pager {
         display: none; }
       #page {
@@ -115,21 +132,29 @@
         .script .page-header {
           font-size: 100%;
           background-color: white; }
+        .script .character span {
+          color: black;
+          text-decoration: underline; }
         .script .character .parenthetical {
           color: black;
           font-style: italic; }
+        .script .dialog {
+          color: black; }
         .script .dialog-count {
           color: black; 
           font-size: 70%; }
     </style>
   </head>
   <body>
-    <h1>
-      <%= title %>
-      <% unless is_empty?('revision') %>
-      <div><%= revision %></div>
+    <header>
+      <h1><%= title %></h1>
+      <% unless is_empty?('subtitle') %>
+      <h3><%= subtitle %></h3>
       <% end %>
-    </h1>
+      <% unless is_empty?('revision') %>
+      <h4><%= revision %></h4>
+      <% end %>
+    </header>
 <% if page_count > 1 %>
     <div id="pager">
     <% page_headers.each_with_index do |n, i| %>
@@ -179,7 +204,7 @@
 
       when 'dialog', 'sfx'
         %>
-        <tr>
+        <tr class="<%= node.kind %>">
           <td class="dialog-count"><%= node.count %></td>
           <td class="character">
             <span><%= node.char.join('</span> & <span>') if node.char != node.prev_node.char %></span>
