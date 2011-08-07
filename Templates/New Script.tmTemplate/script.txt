@@ -1,7 +1,10 @@
 @ Title:     ${TM_NEW_FILE_BASENAME}
+@ Subtitle:  My Optional Subtitle
 @ Author:    ${TM_USERNAME}
 @ Revision:  First Draft
 
-[Page 1]
+[Page #]
 
-Panel 1 - Panel description here.
+Panel # - Panel description here.
+
+  Character: Says what?
