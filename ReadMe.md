@@ -9,7 +9,7 @@ Installation:
 
 ## Example
 
-Here's an example of what a Graphic Novelist script look like:
+Here's an example of what a Graphic Novelist script looks like:
 
     @ Title:    Moonkin P.I.
     @ Subtitle: The Case of Rick Rachette's Gilded Gizmo
@@ -18,28 +18,34 @@ Here's an example of what a Graphic Novelist script look like:
 
     [Page #]
 
-    Panel # - Opening shot is of a teepee with a sign out front reading "Darkshore Detectives Inc." Beneath, in smaller hand written letters, "No quest too small."
+    Panel # - Opening shot is of a teepee with a sign out front reading 
+    "Darkshore Detectives Inc." Beneath, in smaller hand written letters, 
+    "No quest too small."
     
     A satyr is picking up a newspaper from the yard.
 
 
     [Page #]
 
-    Panel # - Ville, a Moonkin, is sitting at his desk drinking from a mug. Pete, a Satyr, has just entered their office/teepee.
+    Panel # - Ville, a Moonkin, is sitting at his desk drinking from a mug.
+    Pete, a Satyr, has just entered their office/teepee.
 
       VILLE: Pete, being a detective sucks.
       PETE: How would you know, Ville? We've never had a single job.
       VILLE: Yeah, that's why it sucks.
 
-    Panel # - Pete walks over to the coffee maker, we see Ville in the background, head in hand.
+    Panel # - Pete walks over to the coffee maker, we see Ville in the 
+    background, head in hand.
 
       VILLE: It's the stupid questers! They keep taking all our potential jobs.
-      VILLE: They work for nearly nothing too! It's completely crashing the P.I. market.
+             They work for nearly nothing too! It's completely crashing the
+             P.I. market.
 
     Panel # - Pete sits down at his desk.
 
       PETE: So true.
-      VILLE: We need to be more aggressive about leads. When we get one, we need to pounce on it!
+      VILLE: We need to be more aggressive about leads. 
+             When we get one, we need to pounce on it!
 
     Panel #
 
