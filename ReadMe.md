@@ -7,6 +7,13 @@ Installation:
     cd ~/Library/Application\ Support/TextMate/Bundles
     git clone git://github.com/darthapo/GraphicNovelist-tmbundle.git GraphicNovelist.tmbundle
 
+
+Features:
+
+- Auto-number pages, panels, and dialog balloons
+- Separate numbers for dialog and SFX
+- Compact printing, I page per script page
+
 ## Example
 
 Here's an example of what a Graphic Novelist script looks like:
@@ -49,5 +56,37 @@ Here's an example of what a Graphic Novelist script looks like:
 
     Panel #
 
-      PETE: Speaking of which, I think I found a new lead.
+      PETE: (offhand) Speaking of which, I think I found a new lead.
       VILLE: Really?
+    
+    
+    [Page #]
+    
+    Panel #
+    
+      PETE: Yes. I heard old man Rachette lost something and needs it found.
+      VILLE: That old gnome, really? You're not just saying that to cheer
+             me up, are you?
+    
+    Panel #
+    
+      PETE: Are you kidding? I like you more when you're depressed. You have
+            far less unfounded optimism.
+    
+    Panel # - Ville jumps up.
+    
+      VILLE: Well then, what are we waiting for? We need to talk to him before
+             one of those questers beats us to him! 
+    
+    Panel # - Ville gets a dreamy look to his eyes.
+    
+      VILLE: He'll hire us, of course, and we'll finally be official detectives!
+             It'll be so great!
+    
+    Panel #
+    
+      PETE: Uh huh. Just like that.
+    
+    Panel # - Pete and Ville walking out of the teepee...
+    
+      PETE: I wonder if there are detective groupies?
